@@ -20,3 +20,5 @@ typedef struct stack {
   event* top;
 } stack;
 stack undo_stack = {NULL};
+
+
