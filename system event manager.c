@@ -28,6 +28,19 @@ void tambah_event (char* nama, char* tanggal, char* deskripsi){
   strcpy (newEvent -> deskripsi, deskripsi);
   newEvent -> next = NULL;
 
+  if (event_list == NULL){
+    event_list = newEvent;
+    event_list -> next = event_list;
+  } else {
+    event* temp = event_list;
+    while (temp -> next != event_list) {
+      temp = temp -> next;
+    }
+  temp -> next = newEvent;
+  newEvent -> next = event_list;
+  }
+}
+
 void tampilkan_event_berdasarkan_tanggal () {
   if (event_queue.depan == NULL) {
       printf("Tidak ada acara yang terdaftar berdasarkan tanggal.\n");
