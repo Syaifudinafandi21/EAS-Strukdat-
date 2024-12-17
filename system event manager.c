@@ -53,3 +53,12 @@ void undo_delete(){
   undo_stack.top = undo_stack.top->next;
   restored_event->next = NULL;
 }
+
+void dequeue() {
+  if (event_queue.depan == NULL) {
+      printf("Antrian kosong. Tidak ada acara selesai.\n");
+      return;
+  }
+
+event* temp = event_queue.depan;
+event_queue.depan = event_queue.depan->next;
