@@ -36,3 +36,13 @@ while (temp != NULL) {
 }
 }
 
+void undo_delete(){
+  if(undo_stack.top == NULL){
+      printf("Tidak ada acara yang bisa di-undo.\n");
+      return;
+  }
+
+  event* restored_event = undo_stack.top;
+  undo_stack.top = undo_stack.top->next;
+  restored_event->next = NULL;
+}
