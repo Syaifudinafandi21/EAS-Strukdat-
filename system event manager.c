@@ -21,6 +21,13 @@ typedef struct stack {
 } stack;
 stack undo_stack = {NULL};
 
+void tambah_event (char* nama, char* tanggal, char* deskripsi){
+  event* newEvent = (event*)malloc(sizeof(event));
+  strcpy (newEvent -> nama, nama);
+  strcpy (newEvent -> tanggal, tanggal);
+  strcpy (newEvent -> deskripsi, deskripsi);
+  newEvent -> next = NULL;
+
 void tampilkan_event_berdasarkan_tanggal () {
   if (event_queue.depan == NULL) {
       printf("Tidak ada acara yang terdaftar berdasarkan tanggal.\n");
