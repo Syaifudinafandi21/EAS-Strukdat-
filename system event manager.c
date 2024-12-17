@@ -34,6 +34,62 @@ void tampilkan_event_berdasarkan_tanggal () {
       return;
   }
 
+void hapus_event(char* nama){
+  if (event_list == NULL){
+    printf("tidak ada acara untuk dihapus");
+    return;
+  }
+
+  event *temp = event_list, *prev = NULL;
+   do {
+        if (strcmp(temp->nama, nama) == 0) {
+            if (temp == event_list) {
+                if (temp->next == temp) { 
+                    event_list = NULL;
+                } else {
+                    event* last = event_list;
+                    while (last->next != event_list) {
+                        last = last->next;
+                    }
+                    event_list = event_list->next;
+                    last->next = event_list;
+                }
+            } else {
+                prev->next = temp->next;
+            }
+           event *curr = event_queue.depan, *queue_prev = NULL;
+            while (curr != NULL) {
+                if (strcmp(curr->nama, nama) == 0) {
+                    if (queue_prev == NULL) {
+                        event_queue.depan = curr->next;
+                        if (event_queue.depan == NULL) {
+                            event_queue.belakang = NULL;
+                        }
+                    } else {
+                        queue_prev->next = curr->next;
+                        if (queue_prev->next == NULL) {
+                            event_queue.belakang = queue_prev;
+                        }
+                    }
+                    free(curr);
+                    break;
+                }
+                queue_prev = curr;
+                curr = curr->next;
+            }
+          temp->next = undo_stack.top;
+          undo_stack.top = temp;
+
+          printf("acara '%s' telah dihapus.\n", nama);
+          return;
+        }
+        prev = temp;
+        temp = temp->next;
+   }while (temp != event_list);
+    printf("acara '%s' tidak ditemukan.\n", nama);
+}
+          
+//enqueue sisanya fandi
 event* temp = event_queue.depan;
 while (temp != NULL) {
    printf("Nama       : %s\n", temp->nama);
