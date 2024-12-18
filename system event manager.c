@@ -171,3 +171,12 @@ void dequeue() {
 
 event* temp = event_queue.depan;
 event_queue.depan = event_queue.depan->next;
+
+event* curr = event_list;
+event* prev = NULL;
+do {
+  if (strcmp(curr->nama, temp->nama) == 0 && strcmp(curr->tanggal, temp->tanggal) == 0) {
+       if (curr == event_list) {
+           if (curr->next == curr) {
+              event_list = NULL;
+           }else { 
