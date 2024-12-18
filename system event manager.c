@@ -145,6 +145,22 @@ void undo_delete(){
   event* restored_event = undo_stack.top;
   undo_stack.top = undo_stack.top->next;
   restored_event->next = NULL;
+
+  if(event_list == NULL){
+      event_list == restored_event;
+      event_list->next = event_list;
+  }else{
+      event* temp = event_list;
+      event* prev = NULL;
+
+    do{
+      if(strcmp(restored_event->tanggal, temp->tanggal) < 0){
+          break;
+      }
+      prev = temp;
+      temp = temp->next;
+    }while (temp != event_list);
+  }
 }
 
 void dequeue() {
