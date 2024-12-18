@@ -46,6 +46,14 @@ void tampilkan_event_berdasarkan_tanggal () {
       printf("Tidak ada acara yang terdaftar berdasarkan tanggal.\n");
       return;
   }
+  event* temp = event_queue.depan;
+while (temp != NULL) {
+   printf("Nama       : %s\n", temp->nama);
+   printf("Tanggal    : %s\n", temp->tanggal);
+   printf("Deskripsi  : %s\n\n", temp->deskripsi);
+   temp = temp->next;
+  }
+}
 
 void hapus_event(char* nama){
   if (event_list == NULL){
@@ -102,14 +110,30 @@ void hapus_event(char* nama){
     printf("acara '%s' tidak ditemukan.\n", nama);
 }
           
-//enqueue sisanya fandi
-event* temp = event_queue.depan;
-while (temp != NULL) {
-   printf("Nama       : %s\n", temp->nama);
-   printf("Tanggal    : %s\n", temp->tanggal);
-   printf("Deskripsi  : %s\n\n", temp->deskripsi);
-   temp = temp->next;
-}
+void enqueue(char* nama, char* tanggal, char* deskripsi) {
+    event* newEvent = (event*)malloc(sizeof(event));
+    strcpy(newEvent->nama, nama);
+    strcpy(newEvent->tanggal, tanggal);
+    strcpy(newEvent->deskripsi, deskripsi);
+    newEvent->next = NULL;
+
+    if (event_queue.depan == NULL || strcmp(newEvent->tanggal, event_queue.depan->tanggal) < 0) {
+        newEvent->next = event_queue.depan;
+        event_queue.depan = newEvent;
+        if (event_queue.belakang == NULL) {
+            event_queue.belakang = newEvent;
+        }
+    } else {
+        event* temp = event_queue.depan;
+        while (temp->next != NULL && strcmp(newEvent->tanggal, temp->next->tanggal) >= 0) {
+            temp = temp->next;
+        }
+        newEvent->next = temp->next;
+        temp->next = newEvent;
+        if (newEvent->next == NULL) {
+            event_queue.belakang = newEvent;
+        }
+    }
 }
 
 void undo_delete(){
