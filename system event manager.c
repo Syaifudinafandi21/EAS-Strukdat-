@@ -178,6 +178,31 @@ void undo_delete(){
   printf("Undo berhasil, acara '%s' dipulihkan.\n", restored_event->nama);
 }
 
+void enqueue (char* nama, char* tanggal, char* deskripsi){
+  event* newEvent = (event*)malloc(sizeof(event));
+  strcpy (newEvent -> nama, nama);
+  strcpy (newEvent -> tanggal, tanggal);
+  strcpy (newEvent -> deskripsi, deskripsi);
+  newEvent -> next = NULL;
+if (event_queue.depan == NULL || strcmp (newEvent -> tanggal, event_queue -> tanggal) < 0){
+  newEvent -> next = event_queue.depan;
+  event_queue.depan = newEvent;
+  if (event_queue.belakang == NULL){
+      event_queue.belakang = newEvent;
+  }
+} else {
+  event* temp = event_queue.depan;
+  while (temp -> next != NULL && strcmp (newEvent -> tanggal, temp -> next -> tanggal) >= 0){
+        temp = temp -> next;
+  }
+  newEvent -> next = temp -> next;
+  temp -> next = newEvent;
+  if (newEvent -> next == NULL){
+      event_queue.belakang = newEvent;
+    }
+  }
+}
+
 void dequeue() {
   if (event_queue.depan == NULL) {
       printf("Antrian kosong. Tidak ada acara selesai.\n");
