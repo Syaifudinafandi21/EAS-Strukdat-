@@ -220,6 +220,23 @@ do {
            if (curr->next == curr) {
               event_list = NULL;
            }else { 
+            event* last = event_list;
+              while (last->next != event_list) {
+                  last = last->next;
+              }
+               event_list = event_list->next;
+               last->next = event_list;
+              }
+          } else {
+              prev->next = curr->next;
+          }
+           free(curr);
+          break;
+  }
+  prev = curr;
+  curr = curr->next;
+} while (curr != event_list);
+      
 
 
 int main(){
