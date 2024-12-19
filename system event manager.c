@@ -236,7 +236,14 @@ do {
   prev = curr;
   curr = curr->next;
 } while (curr != event_list);
-      
+
+printf("Acara '%s' dengan tanggal '%s' telah selesai dan dihapus dari antrian.\n", temp->nama,temp->tanggal);
+free(temp);
+
+  if (event_queue.depan == NULL){
+    event_queue.belakang == NULL;
+  }
+}
 
 
 int main(){
