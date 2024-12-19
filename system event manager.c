@@ -195,3 +195,42 @@ do {
            if (curr->next == curr) {
               event_list = NULL;
            }else { 
+
+
+int main(){
+  char nama[50[, tanggal[20], deskripsi[1000];
+  int pilihan;
+
+  do {
+      printf ("Menu manager system :\n");
+      printf ("1. Tambah Acara\n");
+      printf ("2. Tampilkan Acara Berdasarkan Tanggal\n");
+      printf ("3. Hapus Acara\n");
+      printf ("4. Undo Penghapusan Acara\n");
+      printf ("5. Tandai Acara Sebagai Selesai\n");
+      printf ("6. Keluar\n");
+      printf ("Pilih Menu : ");
+      Scanf ("%d", &pilihan);
+      getchar ();
+
+      switch (pilihan) {
+            case 1:
+                printf("Masukkan Nama Acara: ");
+                fgets(nama, sizeof(nama), stdin);
+                nama[strcspn(nama, "\n")] = 0;
+
+                printf("Masukkan Tanggal (dd-mm-yyyy): ");
+                fgets(tanggal, sizeof(tanggal), stdin);
+                tanggal[strcspn(tanggal, "\n")] = 0;
+
+                printf("Masukkan Deskripsi: ");
+                fgets(deskripsi, sizeof(deskripsi), stdin);
+                deskripsi[strcspn(deskripsi, "\n")] = 0;
+
+                tambah_event(nama, tanggal, deskripsi);
+                enqueue(nama, tanggal, deskripsi);
+
+                printf("Acara berhasil ditambahkan.\n");
+                system("pause");
+                system("cls");
+                break;
