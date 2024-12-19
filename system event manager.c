@@ -160,7 +160,22 @@ void undo_delete(){
       prev = temp;
       temp = temp->next;
     }while (temp != event_list);
+
+    if (prev == NULL){
+      restored_event->next = event_list;
+      event* last = event_list;
+      while(last->next != event_list){
+        last = last->next;
+      }
+      last->next = restored_event;
+      event_list = restored_event;
+    }else{
+      prev->next = restored_event;
+      restored_event->next = temp;
+    }
   }
+  enqueue(restored_event->nama, restored_event->tanggal, restored_event->deskripsi);
+  printf("Undo berhasil, acara '%s' dipulihkan.\n", restored_event->nama);
 }
 
 void dequeue() {
