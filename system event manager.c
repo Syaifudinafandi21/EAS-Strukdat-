@@ -109,32 +109,6 @@ void hapus_event(char* nama){
    }while (temp != event_list);
     printf("acara '%s' tidak ditemukan.\n", nama);
 }
-          
-void enqueue(char* nama, char* tanggal, char* deskripsi) {
-    event* newEvent = (event*)malloc(sizeof(event));
-    strcpy(newEvent->nama, nama);
-    strcpy(newEvent->tanggal, tanggal);
-    strcpy(newEvent->deskripsi, deskripsi);
-    newEvent->next = NULL;
-
-    if (event_queue.depan == NULL || strcmp(newEvent->tanggal, event_queue.depan->tanggal) < 0) {
-        newEvent->next = event_queue.depan;
-        event_queue.depan = newEvent;
-        if (event_queue.belakang == NULL) {
-            event_queue.belakang = newEvent;
-        }
-    } else {
-        event* temp = event_queue.depan;
-        while (temp->next != NULL && strcmp(newEvent->tanggal, temp->next->tanggal) >= 0) {
-            temp = temp->next;
-        }
-        newEvent->next = temp->next;
-        temp->next = newEvent;
-        if (newEvent->next == NULL) {
-            event_queue.belakang = newEvent;
-        }
-    }
-}
 
 void undo_delete(){
   if(undo_stack.top == NULL){
