@@ -283,3 +283,42 @@ int main(){
                 system("pause");
                 system("cls");
                 break;
+
+            case 2:
+                tampilkan_event_berdasarkan_tanggal();
+                system("pause");
+                system("cls");
+                break;
+
+            case 3:
+                printf("Masukkan Nama Acara yang Akan Dihapus: ");
+                fgets(nama, sizeof(nama), stdin);
+                nama[strcspn(nama, "\n")] = 0;
+                hapus_event(nama);
+                system("pause");
+                system("cls");
+                break;
+
+            case 4:
+                undo_delete();
+                system("pause");
+                system("cls");
+                break;
+
+            case 5:
+                dequeue();
+                system("pause");
+                system("cls");
+                break;
+
+            case 6:
+                printf("Keluar dari program.\n");
+                break;
+
+            default:
+                printf("Pilihan tidak valid.\n");
+        }
+    } while (pilihan != 6);
+
+    return 0;
+}
