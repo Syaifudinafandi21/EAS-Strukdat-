@@ -158,7 +158,7 @@ void enqueue (char* nama, char* tanggal, char* deskripsi){
   strcpy (newEvent -> tanggal, tanggal);
   strcpy (newEvent -> deskripsi, deskripsi);
   newEvent -> next = NULL;
-if (event_queue.depan == NULL || strcmp (newEvent -> tanggal, event_queue -> tanggal) < 0){
+if (event_queue.depan == NULL || strcmp (newEvent -> tanggal, event_queue.depan -> tanggal) < 0){
   newEvent -> next = event_queue.depan;
   event_queue.depan = newEvent;
   if (event_queue.belakang == NULL){
@@ -221,7 +221,7 @@ free(temp);
 
 
 int main(){
-  char nama[50[, tanggal[20], deskripsi[1000];
+  char nama[50], tanggal[20], deskripsi[1000];
   int pilihan;
 
   do {
@@ -233,7 +233,7 @@ int main(){
       printf ("5. Tandai Acara Sebagai Selesai\n");
       printf ("6. Keluar\n");
       printf ("Pilih Menu : ");
-      Scanf ("%d", &pilihan);
+      scanf ("%d", &pilihan);
       getchar ();
 
       switch (pilihan) {
